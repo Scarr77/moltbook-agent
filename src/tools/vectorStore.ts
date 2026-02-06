@@ -1,0 +1,12 @@
+import { Chroma } from "@langchain/community/vectorstores/chroma";
+import { embeddings } from "./embeddings.ts";
+
+
+
+export async function getVectorStore() {
+  return await Chroma.fromExistingCollection(embeddings, {
+    collectionName: "moltbook-memory",
+    url: "http://localhost:8000",
+  });
+}
+
