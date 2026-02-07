@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { llm } from "../tools/llm.ts";
+import { getLLM } from "../tools/llm.ts";
 import { startSpan, endSpan } from "../telemetry/tracer.ts";
 import type { Trace } from "../telemetry/tracer.ts";
 
@@ -112,7 +112,7 @@ Web task:
 ]
 `;
 
-  const res = await llm.invoke(prompt);
+  const res = await getLLM().invoke(prompt);
 
   const content =
     typeof res.content === "string"

@@ -1,7 +1,18 @@
 import { ChatOpenAI } from "@langchain/openai";
 
-export const llm = new ChatOpenAI({
-  model: "gpt-4.1-mini",
-  temperature: 0.2,
-});
+let _llm: ChatOpenAI | null = null;
+
+export function getLLM() {
+  if (!_llm) {
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error("OPENAI_API_KEY is not set at runtime");
+    }
+
+    _llm = new ChatOpenAI({
+      temperature: 0.2,
+    });
+  }
+
+  return _llm;
+}
 

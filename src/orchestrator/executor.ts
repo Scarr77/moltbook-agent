@@ -1,6 +1,6 @@
 import type { PlanStep } from "./planner.ts";
 import { retrieveContext } from "../tools/retrieval.ts";
-import { llm } from "../tools/llm.ts";
+import { getLLM } from "../tools/llm.ts";
 import { route } from "./router.ts";
 import { runTool } from "../tools/registry.ts";
 
@@ -62,7 +62,7 @@ export async function execute(
           agent: agentName,
         });
 
-        const res = await llm.invoke(
+        const res = await getLLM().invoke(
           `${agent.systemPrompt}
 
 Use the following context:

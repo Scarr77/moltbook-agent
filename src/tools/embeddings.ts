@@ -1,6 +1,13 @@
 import { OpenAIEmbeddings } from "@langchain/openai";
 
-export const embeddings = new OpenAIEmbeddings({
-  model: "text-embedding-3-large",
-});
+let _embeddings: OpenAIEmbeddings | null = null;
+
+export function getEmbeddings(): OpenAIEmbeddings {
+  if (!_embeddings) {
+    _embeddings = new OpenAIEmbeddings({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+  return _embeddings;
+}
 
